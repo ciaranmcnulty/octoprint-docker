@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+    octoprint:
+        build:
+            context: .
+            target: octoprint
+        environment:
+            SECRET_KEY: $OCTOPRINT_SECRET
+        ports:
+            - "8080:80" 
+        devices:
+            - /dev/ttyACM0
