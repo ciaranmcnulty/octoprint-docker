@@ -1,0 +1,12 @@
+accessControl:
+    enabled: false
+server:
+    firstRun: false
+    onlineCheck:
+        enabled: false
+    pluginBlacklist:
+        enabled: false
+    secretKey: rOW5aNK93blWf1y20ttLLKrEzE6qFcdK
+    seenWizards: # disable anon. tracking
+        corewizard: 3
+        tracking: null
