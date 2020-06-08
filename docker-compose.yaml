@@ -8,6 +8,8 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
         command: "--providers.docker --api.insecure=true --entrypoints.web.address=:80" 
+        labels:
+            - traefik.http.middlewares.auth.basicauth.users=$USERNAME:$PASSWORD_HASH
     octoprint:
         build:
             context: .
@@ -20,6 +22,7 @@ services:
             - /dev/ttyACM0
         labels:
             - traefik.http.routers.octoprint.rule=PathPrefix(`/`)
+            - traefik.http.routers.octoprint.middlewares=auth
     webcam:
         build:
             context: .
@@ -30,3 +33,5 @@ services:
             - /dev/video0
         labels:
             - traefik.http.routers.webcam.rule=Query(`action=stream`)
+            - traefik.http.routers.webcam.middlewares=auth
+
