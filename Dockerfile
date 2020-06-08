@@ -16,9 +16,6 @@ FROM base as octoprint
 
 WORKDIR /root/.octoprint
 
-VOLUME ./uploads
-VOLUME ./timelapse
-
 RUN apk --no-cache add ffmpeg gettext libintl
 
 COPY --from=octoprint-build /usr/local/bin /usr/local/bin
@@ -27,6 +24,8 @@ COPY --from=octoprint-build /OctoPrint-* /opt/octoprint
 
 RUN pip install "https://github.com/vookimedlo/OctoPrint-Prusa-Mini-ETA/archive/master.zip" 
 RUN pip install "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
+
+VOLUME uploads timelapse
 
 COPY octoprint-config.yaml config.yaml.template
 COPY printer.profile printerProfiles/_default.profile

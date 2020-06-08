@@ -25,6 +25,9 @@ webcam:
             interval: 10
         postRoll: 2
         type: timed
+folder:
+    uploads: /uploads
+    timelapse: /timelapse
 plugins:
     tplinksmartplug:
         _config_version: 11
