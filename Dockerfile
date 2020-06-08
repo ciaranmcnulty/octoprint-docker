@@ -22,6 +22,7 @@ RUN pip install "https://github.com/vookimedlo/OctoPrint-Prusa-Mini-ETA/archive/
 RUN pip install "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
 
 COPY octoprint-config.yaml /octoprint-config/config.yaml.template
+COPY printer.profile /root/.octoprint/printerProfiles/_default.profile
 
 ENTRYPOINT envsubst < /octoprint-config/config.yaml.template > /octoprint-config/config.yaml \
   && octoprint serve -c /octoprint-config/config.yaml --iknowwhatimdoing --host 0.0.0.0
