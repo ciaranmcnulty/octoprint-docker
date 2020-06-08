@@ -10,6 +10,8 @@ RUN pip install -r requirements.txt
 
 FROM base as octoprint
 
+VOLUME /root/.octoprint/uploads
+
 RUN apk --no-cache add gettext libintl # for envsubst
 
 COPY --from=octoprint-build /usr/local/bin /usr/local/bin
