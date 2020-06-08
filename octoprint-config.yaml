@@ -1,5 +1,7 @@
 accessControl:
     enabled: false
+api:
+    key: $API_KEY
 server:
     port: 80
     firstRun: false
