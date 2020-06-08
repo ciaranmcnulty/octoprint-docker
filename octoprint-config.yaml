@@ -12,11 +12,19 @@ server:
         corewizard: 3
         tracking: null
 webcam:
+    ffmpeg: /usr/bin/ffmpeg
+    ffmpegVideoCodec: libx264
     stream: $PUBLIC_CAMERA_HOST?action=stream
     snapshot: $PRIVATE_CAMERA_HOST?action=snapshot 
     streamRatio: '4:3'
     flipH: true # horizontally flip image
     watermark: false
+    timelapse:
+        fps: 25
+        options:
+            interval: 10
+        postRoll: 2
+        type: timed
 plugins:
     tplinksmartplug:
         _config_version: 11

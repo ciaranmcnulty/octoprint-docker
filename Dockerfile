@@ -11,8 +11,10 @@ RUN pip install -r requirements.txt
 FROM base as octoprint
 
 VOLUME /root/.octoprint/uploads
+VOLUME /root/.octoprint/timelapse
 
 RUN apk --no-cache add gettext libintl # for envsubst
+RUN apk --no-cache add ffmpeg
 
 COPY --from=octoprint-build /usr/local/bin /usr/local/bin
 COPY --from=octoprint-build /usr/local/lib /usr/local/lib
