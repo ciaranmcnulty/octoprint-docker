@@ -1,8 +1,12 @@
 FROM python:3.8-alpine3.10 as base
 
-FROM base as octoprint-build
 
+FROM base as build-base
 RUN apk --no-cache add build-base linux-headers
+
+
+FROM build-base as octoprint-build
+
 RUN wget -qO- https://github.com/OctoPrint/OctoPrint/archive/1.4.0.tar.gz | tar xz 
 WORKDIR /OctoPrint-1.4.0
 RUN pip install -r requirements.txt
@@ -12,17 +16,16 @@ FROM base as octoprint
 
 WORKDIR /root/.octoprint
 
-VOLUME uploads
-VOLUME timelapse
+VOLUME ./uploads
+VOLUME ./timelapse
 
-RUN apk --no-cache add gettext libintl # for envsubst
-RUN apk --no-cache add ffmpeg
+RUN apk --no-cache add ffmpeg gettext libintl
 
 COPY --from=octoprint-build /usr/local/bin /usr/local/bin
 COPY --from=octoprint-build /usr/local/lib /usr/local/lib
 COPY --from=octoprint-build /OctoPrint-* /opt/octoprint
 
-RUN pip install "https://github.com/vookimedlo/OctoPrint-Prusa-Mini-ETA/archive/master.zip"
+RUN pip install "https://github.com/vookimedlo/OctoPrint-Prusa-Mini-ETA/archive/master.zip" 
 RUN pip install "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
 
 COPY octoprint-config.yaml config.yaml.template
@@ -32,10 +35,9 @@ ENTRYPOINT envsubst < config.yaml.template > config.yaml \
   && octoprint serve -c config.yaml --iknowwhatimdoing --host 0.0.0.0
 
 
-FROM base as webcam
+FROM build-base as webcam
 
-RUN apk --no-cache add build-base linux-headers cmake
-RUN apk --no-cache add libjpeg-turbo-dev 
+RUN apk --no-cache add cmake libjpeg-turbo-dev
 RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
 
 WORKDIR /mjpg-streamer-master/mjpg-streamer-experimental
