@@ -7,7 +7,6 @@ server:
         enabled: false
     pluginBlacklist:
         enabled: false
-    secretKey: $SECRET_KEY 
     seenWizards: # disable anon. tracking
         corewizard: 3
         tracking: null
