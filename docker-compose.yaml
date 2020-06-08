@@ -1,25 +1,32 @@
 version: '2.4'
 services:
+    proxy:
+        image: traefik:v2.2
+        ports:
+            - "80:80"
+            - "8082:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        command: "--providers.docker --api.insecure=true --entrypoints.web.address=:80" 
     octoprint:
         build:
             context: .
             target: octoprint
         environment:
-            PUBLIC_CAMERA_HOST: http://octopi.local:8081
             PRIVATE_CAMERA_HOST: http://webcam:80
             POWER_IP: $PRINTER_POWER_IP
             API_KEY: $OCTOPRINT_API_KEY
-        ports:
-            - "8080:80" 
         devices:
             - /dev/ttyACM0
+        labels:
+            - traefik.http.routers.octoprint.rule=PathPrefix(`/`)
     webcam:
         build:
             context: .
             target: webcam
         environment:
             CAMERA_DEVICE: /dev/video0
-        ports:
-            - "8081:80" 
         devices:
             - /dev/video0
+        labels:
+            - traefik.http.routers.webcam.rule=Query(`action=stream`)

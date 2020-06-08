@@ -30,6 +30,8 @@ VOLUME uploads timelapse
 COPY octoprint-config.yaml config.yaml.template
 COPY printer.profile printerProfiles/_default.profile
 
+EXPOSE 80
+
 ENTRYPOINT envsubst < config.yaml.template > config.yaml \
   && octoprint serve -c config.yaml --iknowwhatimdoing --host 0.0.0.0
 
@@ -44,6 +46,8 @@ RUN make
 RUN make install
 
 ENV CAMERA_DEVICE=/dev/video0
+
+EXPOSE 80
 
 ENTRYPOINT exec mjpg_streamer \
   -i "/usr/local/lib/mjpg-streamer/input_uvc.so -y -n -r 1280x960 -d $CAMERA_DEVICE" \

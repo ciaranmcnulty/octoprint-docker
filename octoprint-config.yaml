@@ -15,7 +15,7 @@ server:
 webcam:
     ffmpeg: /usr/bin/ffmpeg
     ffmpegVideoCodec: libx264
-    stream: $PUBLIC_CAMERA_HOST?action=stream
+    stream: ?action=stream
     snapshot: $PRIVATE_CAMERA_HOST?action=snapshot 
     streamRatio: '4:3'
     flipH: true # horizontally flip image
