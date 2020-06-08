@@ -10,8 +10,10 @@ RUN pip install -r requirements.txt
 
 FROM base as octoprint
 
-VOLUME /root/.octoprint/uploads
-VOLUME /root/.octoprint/timelapse
+WORKDIR /root/.octoprint
+
+VOLUME uploads
+VOLUME timelapse
 
 RUN apk --no-cache add gettext libintl # for envsubst
 RUN apk --no-cache add ffmpeg
@@ -23,11 +25,11 @@ COPY --from=octoprint-build /OctoPrint-* /opt/octoprint
 RUN pip install "https://github.com/vookimedlo/OctoPrint-Prusa-Mini-ETA/archive/master.zip"
 RUN pip install "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
 
-COPY octoprint-config.yaml /octoprint-config/config.yaml.template
-COPY printer.profile /root/.octoprint/printerProfiles/_default.profile
+COPY octoprint-config.yaml config.yaml.template
+COPY printer.profile printerProfiles/_default.profile
 
-ENTRYPOINT envsubst < /octoprint-config/config.yaml.template > /octoprint-config/config.yaml \
-  && octoprint serve -c /octoprint-config/config.yaml --iknowwhatimdoing --host 0.0.0.0
+ENTRYPOINT envsubst < config.yaml.template > config.yaml \
+  && octoprint serve -c config.yaml --iknowwhatimdoing --host 0.0.0.0
 
 
 FROM base as webcam
