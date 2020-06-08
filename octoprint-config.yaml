@@ -11,3 +11,9 @@ server:
     seenWizards: # disable anon. tracking
         corewizard: 3
         tracking: null
+webcam:
+    stream: $PUBLIC_CAMERA_HOST?action=stream
+    snapshot: $PRIVATE_CAMERA_HOST?action=snapshot 
+    streamRatio: '4:3'
+    flipH: true # horizontally flip image
+    watermark: false

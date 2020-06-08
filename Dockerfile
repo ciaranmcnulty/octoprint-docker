@@ -23,3 +23,20 @@ COPY octoprint-config.yaml /octoprint-config/config.yaml.template
 
 ENTRYPOINT envsubst < /octoprint-config/config.yaml.template > /octoprint-config/config.yaml \
   && octoprint serve -c /octoprint-config/config.yaml --iknowwhatimdoing --host 0.0.0.0
+
+
+FROM base as webcam
+
+RUN apk --no-cache add build-base linux-headers cmake
+RUN apk --no-cache add libjpeg-turbo-dev 
+RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
+
+WORKDIR /mjpg-streamer-master/mjpg-streamer-experimental
+RUN make
+RUN make install
+
+ENV CAMERA_DEVICE=/dev/video0
+
+ENTRYPOINT exec mjpg_streamer \
+  -i "/usr/local/lib/mjpg-streamer/input_uvc.so -y -n -r 1280x960 -d $CAMERA_DEVICE" \
+  -o "/usr/local/lib/mjpg-streamer/output_http.so -w /usr/local/share/mjpg-streamer/www -p 80"

@@ -5,8 +5,19 @@ services:
             context: .
             target: octoprint
         environment:
-            SECRET_KEY: $OCTOPRINT_SECRET
+            PUBLIC_CAMERA_HOST: http://octopi.local:8081
+            PRIVATE_CAMERA_HOST: http://webcam:80
         ports:
             - "8080:80" 
         devices:
             - /dev/ttyACM0
+    webcam:
+        build:
+            context: .
+            target: webcam
+        environment:
+            CAMERA_DEVICE: /dev/video0
+        ports:
+            - "8081:80" 
+        devices:
+            - /dev/video0
