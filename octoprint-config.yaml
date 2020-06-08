@@ -17,3 +17,31 @@ webcam:
     streamRatio: '4:3'
     flipH: true # horizontally flip image
     watermark: false
+plugins:
+    tplinksmartplug:
+        _config_version: 11
+        arrSmartplugs:
+        -   autoConnect: true
+            autoConnectDelay: 5
+            autoDisconnect: true
+            autoDisconnectDelay: 0
+            automaticShutdownEnabled: false
+            btnColor: '#808080'
+            countdownOffDelay: 1
+            countdownOnDelay: 1
+            currentState: unknown
+            displayWarning: true
+            emeter:
+                get_realtime: {}
+            icon: icon-bolt
+            ip: $POWER_IP
+            label: Power
+            sysCmdOff: false
+            sysCmdOffDelay: 0
+            sysCmdOn: false
+            sysCmdOnDelay: 0
+            sysRunCmdOff: ''
+            sysRunCmdOn: ''
+            thermal_runaway: false
+            useCountdownRules: false
+            warnPrinting: true

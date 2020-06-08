@@ -7,6 +7,7 @@ services:
         environment:
             PUBLIC_CAMERA_HOST: http://octopi.local:8081
             PRIVATE_CAMERA_HOST: http://webcam:80
+            POWER_IP: $PRINTER_POWER_IP
         ports:
             - "8080:80" 
         devices:
