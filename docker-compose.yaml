@@ -4,12 +4,15 @@ services:
         image: traefik:v2.2
         ports:
             - "80:80"
-            - "8082:8080"
+            - "8080:8080"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-        command: "--providers.docker --api.insecure=true --entrypoints.web.address=:80" 
+        command:
+            - "--providers.docker"
+            - "--api.insecure=true" # presents debug on 8080
+            - "--entrypoints.web.address=:80"
         labels:
-            - traefik.http.middlewares.auth.basicauth.users=$USERNAME:$PASSWORD_HASH
+            - "traefik.http.middlewares.auth.basicauth.users=$USERNAME:$PASSWORD_HASH"
         restart: unless-stopped
     octoprint:
         build:
@@ -22,8 +25,9 @@ services:
         devices:
             - /dev/ttyACM0
         labels:
-            - traefik.http.routers.octoprint.rule=PathPrefix(`/`)
-            - traefik.http.routers.octoprint.middlewares=auth
+            - "traefik.http.routers.octoprint.entrypoints=web"
+            - "traefik.http.routers.octoprint.rule=PathPrefix(`/`)"
+            - "traefik.http.routers.octoprint.middlewares=auth"
         restart: unless-stopped
     webcam:
         build:
@@ -34,7 +38,8 @@ services:
         devices:
             - /dev/video0
         labels:
-            - traefik.http.routers.webcam.rule=Query(`action=stream`)
-            - traefik.http.routers.webcam.middlewares=auth
+            - "traefik.http.routers.webcam.entrypoints=web"
+            - "traefik.http.routers.webcam.rule=Query(`action=stream`)"
+            - "traefik.http.routers.webcam.middlewares=auth"
         restart: unless-stopped
 
