@@ -10,6 +10,7 @@ services:
         command: "--providers.docker --api.insecure=true --entrypoints.web.address=:80" 
         labels:
             - traefik.http.middlewares.auth.basicauth.users=$USERNAME:$PASSWORD_HASH
+        restart: unless-stopped
     octoprint:
         build:
             context: .
@@ -23,6 +24,7 @@ services:
         labels:
             - traefik.http.routers.octoprint.rule=PathPrefix(`/`)
             - traefik.http.routers.octoprint.middlewares=auth
+        restart: unless-stopped
     webcam:
         build:
             context: .
@@ -34,4 +36,5 @@ services:
         labels:
             - traefik.http.routers.webcam.rule=Query(`action=stream`)
             - traefik.http.routers.webcam.middlewares=auth
+        restart: unless-stopped
 
