@@ -14,7 +14,7 @@ server:
         tracking: null
 webcam:
     ffmpeg: /usr/bin/ffmpeg
-    ffmpegVideoCodec: libx264
+    ffmpegVideoCodec: mpeg2video
     stream: ?action=stream
     snapshot: $PRIVATE_CAMERA_HOST?action=snapshot 
     streamRatio: '4:3'
