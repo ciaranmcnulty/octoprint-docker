@@ -53,6 +53,11 @@ plugins:
             sysCmdOnDelay: 0
             sysRunCmdOff: ''
             sysRunCmdOn: ''
+            event_on_disconnect: false
+            event_on_error: false
+            gcodeEnabled: false 
+            gcodeOffDelay: 0
+            gcodeOnDelay: 0
             thermal_runaway: false
             useCountdownRules: false
             warnPrinting: true
