@@ -46,9 +46,12 @@ RUN make
 RUN make install
 
 ENV CAMERA_DEVICE=/dev/video0
+ENV CAMERA_RESOLUTION=960x720
+ENV CAMERA_H_FLIP=true
+ENV CAMERA_V_FLIP=true
 
 EXPOSE 80
 
 ENTRYPOINT exec mjpg_streamer \
-  -i "/usr/local/lib/mjpg-streamer/input_uvc.so -y -n -r 1280x960 -d $CAMERA_DEVICE" \
+  -i "/usr/local/lib/mjpg-streamer/input_uvc.so -r $CAMERA_RESOLUTION -hf $CAMERA_H_FLIP -vf $CAMERA_V_FLIP -d $CAMERA_DEVICE" \
   -o "/usr/local/lib/mjpg-streamer/output_http.so -w /usr/local/share/mjpg-streamer/www -p 80"

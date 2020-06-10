@@ -18,7 +18,6 @@ webcam:
     stream: ?action=stream
     snapshot: $PRIVATE_CAMERA_HOST?action=snapshot 
     streamRatio: '4:3'
-    flipH: true # horizontally flip image
     watermark: false
     timelapse:
         fps: 25
