@@ -1,0 +1,12 @@
+${LOGIN_USERNAME}:
+  active: true
+  apikey: null
+  groups:
+    - users
+    - admins
+  password: DUMMY
+  permissions: []
+  roles:
+    - user
+    - admin
+  settings: {}

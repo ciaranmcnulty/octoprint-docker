@@ -1,0 +1,18 @@
+accessControl:
+  enabled: false
+  autologinLocal: true
+  autologinAs: "${LOGIN_USERNAME}"
+  localNetworks:
+    - "0.0.0.0/0"
+server:
+  firstRun: false
+  onlineCheck:
+    enabled: false
+  pluginBlacklist:
+    enabled: false
+  seenWizards: # disable anon. tracking
+    corewizard: 3
+    tracking: null
+folder:
+  uploads: /uploads
+  timelapse: /timelapse

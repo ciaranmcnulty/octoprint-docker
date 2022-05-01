@@ -1,0 +1,18 @@
+services:
+  octoprint:
+    image: ciaranmcnulty/octoprint-docker
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    environment:
+      LOGIN_USERNAME: ${OCTOPRINT_USERNAME}
+    devices:
+      - "${OCTOPRINT_PRINTER_TTY:-/dev/ttyACM0}"
+    build:
+      target: octoprint
+      args:
+        BASE_IMAGE: python:3.9.12-alpine3.15
+        OCTOPRINT_VERSION: 1.7.3
+        CONFIG_BASE: config/config.yaml
+        CONFIG_USERS: config/users.yaml
+        CONFIG_PRINTER: config/prusa_mk25s_profile.yaml
