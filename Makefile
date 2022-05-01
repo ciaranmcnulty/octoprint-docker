@@ -9,7 +9,7 @@ logs: run
 run: build
 	docker compose up -d
 
-build: stop build-config .env
+build: stop build-config
 	docker compose build octoprint
 
 stop:
