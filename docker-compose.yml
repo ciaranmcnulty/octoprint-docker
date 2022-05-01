@@ -18,3 +18,17 @@ services:
         CONFIG_USERS: config/users.yaml
         CONFIG_PRINTER: config/prusa_mk25s_profile.yaml
         CONFIG_PLUGINS: config/plugins.yaml
+
+  webcam:
+    image: ciaranmcnulty/octoprint-webcam-docker
+    ports:
+      - "81:80"
+    devices:
+       - "${OCTOPRINT_WEBCAM_DEV:-/dev/video0}:/dev/video0"
+    restart: unless-stopped
+    build:
+      context: .
+      target: webcam-builder
+      args:
+        BASE_IMAGE: python:3.9.12-alpine3.15
+        MJPEG_STREAMER_VERSION: v1.0.0
