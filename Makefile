@@ -13,7 +13,7 @@ build-local: stop build-config
 	docker buildx bake --load
 
 build-push: stop build-config
-	docker buildx bake --set '*.platform=linux/arm64' --set '*.platform=linux/arm/v7' --push
+	docker buildx bake --push
 
 stop:
 	docker compose down
