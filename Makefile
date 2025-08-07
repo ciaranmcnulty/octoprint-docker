@@ -3,8 +3,8 @@ default: run
 dev:
 	docker compose up --build
 
-run:
-	docker compose up -d
+prod:
+	docker compose up --no-build --detach
 
 push:
 	docker compose build --push
