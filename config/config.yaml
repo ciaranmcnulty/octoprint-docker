@@ -1,9 +1,6 @@
 accessControl:
-  enabled: false
-  autologinLocal: true
-  autologinAs: "${LOGIN_USERNAME}"
-  localNetworks:
-    - "0.0.0.0/0"
+  trustBasicAuthentication: true
+  checkBasicAuthenticationPassword: false
 server:
   firstRun: false
   onlineCheck:

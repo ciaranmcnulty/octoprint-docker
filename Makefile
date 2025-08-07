@@ -7,7 +7,7 @@ run:
 	docker compose up -d
 
 push:
-	docker compose build --push .
+	docker compose build --push
 
 stop:
 	docker compose down

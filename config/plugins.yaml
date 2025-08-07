@@ -1,39 +1,3 @@
 plugins:
-  tplinksmartplug:
-    x-plugin-url: "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/refs/tags/1.0.2.zip"
-    _config_version: 11
-    arrSmartplugs:
-        -   autoConnect: true
-            autoConnectDelay: 5
-            autoDisconnect: true
-            autoDisconnectDelay: 0
-            automaticShutdownEnabled: false
-            btnColor: '#808080'
-            countdownOffDelay: 1
-            countdownOnDelay: 1
-            currentState: unknown
-            displayWarning: true
-            emeter:
-                get_realtime: {}
-            icon: icon-bolt
-            ip: ${POWER_IP_ADDRESS}
-            label: Power
-            sysCmdOff: false
-            sysCmdOffDelay: 0
-            sysCmdOn: false
-            sysCmdOnDelay: 0
-            sysRunCmdOff: ''
-            sysRunCmdOn: ''
-            event_on_disconnect: false
-            event_on_error: false
-            gcodeEnabled: false
-            gcodeOffDelay: 0
-            gcodeOnDelay: 0
-            thermal_runaway: false
-            useCountdownRules: false
-            warnPrinting: true
   prusa_mini_eta:
     x-plugin-url: "https://github.com/egguy/OctoPrint-Prusa-Mini-ETA/archive/refs/tags/0.1.4.zip"
-  prusaslicerthumbnails:
-    x-plugin-url: "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/refs/tags/1.0.0.zip"
-    inline_thumbnail: true
