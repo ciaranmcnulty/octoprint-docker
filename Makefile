@@ -10,10 +10,10 @@ run:
 	docker compose up -d
 
 build-local: stop build-config
-	docker buildx bake --load
+	docker buildx build --load .
 
 build-push: stop build-config
-	docker buildx bake --push
+	docker compose build --push .
 
 stop:
 	docker compose down
